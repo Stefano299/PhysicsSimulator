@@ -14,6 +14,7 @@ private:
     static void initVertices();
     static void initBuffers();
     static float* vertexPos;
+    static std::vector<float> vertexNormals;
     static unsigned int VAO;
     static unsigned int VBO;
     glm::vec3 position;
