@@ -10,8 +10,9 @@
 
 #include "constants.h"
 #include "Camera.h"
+#include "Emitter.h"
 
-class SphereContainer;
+
 class Platform;
 class SkyBox;
 class PhysicsEngine;
@@ -26,7 +27,7 @@ private:
     sf::RenderWindow window;
     sf::Event event;
     Camera camera;
-    std::shared_ptr<SphereContainer> sphereContainer;
+    std::shared_ptr<Emitter> emitter;
     std::shared_ptr<Platform> platform;
     std::shared_ptr<SkyBox> skyBox;
     std::shared_ptr<PhysicsEngine> physicsEngine;

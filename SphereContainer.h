@@ -24,7 +24,7 @@ private:
 public:
     SphereContainer();
     void draw(const glm::mat4& view, const glm::mat4& projection);
-    void addSphere(const glm::vec3& pos);
+    void addSphere(const glm::vec3& pos, const glm::vec3& velocity);
     void moveSpheres();
     const std::vector<Sphere>& getSpheres() const;
 };

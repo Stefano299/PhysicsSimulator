@@ -11,7 +11,6 @@
 #include "PhysicsEngine.h"
 #include "SkyBox.h"
 #include "Platform.h"
-#include "SphereContainer.h"
 
 float gameTime = 0;
 
@@ -20,12 +19,10 @@ System::System(): camera(glm::vec3(0.0f, 1.0f, 0.0f), 0.1f, 0.12f) {
     initWindow();
     initOpenGL();
     //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
-    sphereContainer = std::unique_ptr<SphereContainer>(new SphereContainer);
-    sphereContainer->addSphere(glm::vec3(0.0f, 1.25f, -5.0f));
-    sphereContainer->addSphere(glm::vec3(0.05f, 2.0f, -5.0f));
+    emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 2.5f);
     platform = std::make_shared<Platform>(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(15.0f, 0.5f, 15.0f));
     skyBox = std::make_shared<SkyBox>();
-    physicsEngine = std::make_shared<PhysicsEngine>(sphereContainer, platform);
+    physicsEngine = std::make_shared<PhysicsEngine>(emitter, platform);
 }
 
 void System::handleEvents()  {
@@ -48,7 +45,8 @@ void System::handleInput() {
 void System::update() {
     gameTime = clock.getElapsedTime().asSeconds();
     physicsEngine->update();
-    sphereContainer->moveSpheres(); //Si muovono secondo il loro attributo velocità
+    emitter->emitSpheres();
+    emitter->updateSpheres(); //Si muovono secondo il loro attributo velocità
     camera.reset(window);
 }
 
@@ -57,7 +55,7 @@ void System::render() {
     glm::mat4 projection = camera.getProjection();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     skyBox->draw(projection, glm::mat4(glm::mat3(view)));
-    sphereContainer->draw(view, projection);
+    emitter->drawSpheres(view, projection);
     platform->draw(view, projection);
     window.display();
 }

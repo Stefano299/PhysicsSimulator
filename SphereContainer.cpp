@@ -24,8 +24,9 @@ void SphereContainer::draw(const glm::mat4 &view, const glm::mat4 &projection) {
 }
 
 
-void SphereContainer::addSphere(const glm::vec3 &pos) {
+void SphereContainer::addSphere(const glm::vec3 &pos, const glm::vec3& velocity) {
     Sphere sphere(pos);
+    sphere.setVelocity(velocity);
     spheres.push_back(sphere);
     models.push_back(sphere.getModel());  //Inutile in quanto vengono  aggiornate ogni frame
     setAttribPointers();
