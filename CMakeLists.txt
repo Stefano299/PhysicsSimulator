@@ -8,6 +8,15 @@ add_executable(PhysicsSimulator main.cpp
         System.h
         constants.h
         include/glad.c
+        Sphere.cpp
+        Sphere.h
+        Shader.cpp
+        SphereContainer.cpp
+        SphereContainer.h
+        Camera.cpp
+        stb_image.h
+        stb_image.cpp
+        helper.cpp
 )
         
 target_include_directories(PhysicsSimulator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)

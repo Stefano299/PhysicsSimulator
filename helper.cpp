@@ -2,7 +2,7 @@
 // Created by stefano on 8/18/24.
 //
 
-#include"../headers/helper.h"
+#include"helper.h"
 #include<cstdlib>
 #include<ctime>
 

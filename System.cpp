@@ -7,9 +7,12 @@
 #include "glad/glad.h"
 #include "System.h"
 
-System::System() {
+System::System(): camera(glm::vec3(0.0f, 0.0f, 0.0f), 0.1f, 0.12f) {
     initWindow();
     initOpenGL();
+    //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
+    sphereContainer = std::unique_ptr<SphereContainer>(new SphereContainer);
+    sphereContainer->addSphere(glm::vec3(0.0f, 0.0f, -5.0f));
 }
 
 void System::handleEvents()  {
@@ -18,20 +21,24 @@ void System::handleEvents()  {
     }
     else if(event.type == sf::Event::Resized){
         glViewport(0, 0, event.size.width, event.size.height);
+        //TODO aggiorna projection matrix
     }
+    camera.handleRotation(event);
+    camera.handleCursorLock(event, window);
 }
 
 
-void System::handleInput() const {
-
+void System::handleInput() {
+    camera.handleMovement();
 }
 
-void System::update() const {
-
+void System::update() {
+    camera.reset(window);
 }
 
 void System::render() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    sphereContainer->draw(camera.getView(), camera.getProjection());
     window.display();
 }
 
@@ -46,6 +53,16 @@ void System::run() {
     }
 }
 
+void System::initWindow() {
+    sf::ContextSettings settings;
+    settings.attributeFlags = sf::ContextSettings::Core;
+    settings.majorVersion = 3;
+    settings.minorVersion = 3;
+    settings.depthBits = 24;
+    window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Physics Simulator", sf::Style::Default, settings);
+    window.setFramerateLimit(60);
+    window.setActive(true);
+}
 
 void System::initOpenGL() const {
     if(!gladLoadGLLoader(reinterpret_cast<GLADloadproc>(sf::Context::getFunction))){
@@ -53,16 +70,6 @@ void System::initOpenGL() const {
     }
     glClearColor(0.6f, 0.8f, 0.9f, 1.0f);
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    glEnable(GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
 }
 
-void System::initWindow() {
-    sf::ContextSettings settings;
-    settings.majorVersion = 3;
-    settings.minorVersion = 3;
-    settings.depthBits = 24;
-    settings.stencilBits = 4;
-    window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Physics Simulator", sf::Style::Default, settings);
-    window.setFramerateLimit(60);
-    window.setActive(true);
-}
