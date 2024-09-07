@@ -19,6 +19,7 @@ private:
     static unsigned int VAO;
     static unsigned int VBO;
     glm::vec3 velocity;
+    glm::vec3 size;
     glm::vec3 position;
     glm::mat4 model;
     float mass;
@@ -33,6 +34,8 @@ public:
     float getMass() const;
     void setVelocity(const glm::vec3& vel);
     const glm::vec3& getVelocity() const;
+    const glm::vec3& getSize() const;
+    bool operator!=(const Sphere& right) const;
     ~Sphere() = default; //TODO toglielo e metterci una funzione statica chiamata alla fine di system, in quanto l'array è statica
 };
 

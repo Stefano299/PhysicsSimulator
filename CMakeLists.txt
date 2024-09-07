@@ -25,6 +25,8 @@ add_executable(PhysicsSimulator main.cpp
         PhysicsEngine.h
         CollisionSystem.cpp
         CollisionSystem.h
+        Emitter.cpp
+        Emitter.h
 )
         
 target_include_directories(PhysicsSimulator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)

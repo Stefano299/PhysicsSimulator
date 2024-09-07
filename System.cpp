@@ -15,14 +15,15 @@
 
 float gameTime = 0;
 
-System::System(): camera(glm::vec3(0.0f, 0.0f, 0.0f), 0.1f, 0.12f) {
+System::System(): camera(glm::vec3(0.0f, 1.0f, 0.0f), 0.1f, 0.12f) {
     clock.restart();
     initWindow();
     initOpenGL();
     //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
     sphereContainer = std::unique_ptr<SphereContainer>(new SphereContainer);
-    sphereContainer->addSphere(glm::vec3(0.0f, 0.0f, -5.0f));
-    platform = std::make_shared<Platform>(glm::vec3(0.0f, -1.25f, -5.0f), glm::vec3(15.0f, 0.5f, 15.0f));
+    sphereContainer->addSphere(glm::vec3(0.0f, 1.25f, -5.0f));
+    sphereContainer->addSphere(glm::vec3(0.05f, 2.0f, -5.0f));
+    platform = std::make_shared<Platform>(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(15.0f, 0.5f, 15.0f));
     skyBox = std::make_shared<SkyBox>();
     physicsEngine = std::make_shared<PhysicsEngine>(sphereContainer, platform);
 }

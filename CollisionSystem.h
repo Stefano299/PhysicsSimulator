@@ -10,7 +10,9 @@
 class Sphere;
 class Platform;
 namespace CollisionSystem {
-    const glm::vec3& spherePlatform(const Sphere& sphere, const Platform& platform);
+    bool spherePlatform(const Sphere& sphere, const Platform& platform);
+    //Il terzo argomento restituisce il vettore normale dello scontro
+    bool sphereSphere(const Sphere& sphere1, const Sphere& sphere2, glm::vec3& normal);
 };
 
 

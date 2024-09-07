@@ -9,17 +9,21 @@
 
 #include "gameTime.h"
 #include "constants.h"
+#include "Sphere.h"
 
 class SphereContainer;
 class Platform;
 class PhysicsEngine {
 private:
     void gravity() const;
+    void handlePlatformsCollisions(Sphere &it, const glm::vec3& newVel) const;
+    void handleSpheresCollisions(Sphere &it1) const;
     std::shared_ptr<SphereContainer> sphereContainer;
     std::shared_ptr<Platform> platform;
 public:
     PhysicsEngine(std::shared_ptr<SphereContainer> sphereContainer, std::shared_ptr<Platform> platform);
     void update();
+
 };
 
 

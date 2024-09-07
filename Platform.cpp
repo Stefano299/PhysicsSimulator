@@ -92,4 +92,12 @@ void Platform::initShader() {
     shader.useProgram();
 }
 
+const glm::vec3 &Platform::getSize() const {
+    return size;
+}
+
+const glm::vec3 &Platform::getPosition() const {
+    return position;
+}
+
 
