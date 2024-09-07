@@ -68,5 +68,15 @@ void SphereContainer::updateModels() {
     setAttribPointers();
 }
 
+const std::vector<Sphere> &SphereContainer::getSpheres() const {
+    return spheres;
+}
+
+void SphereContainer::moveSpheres() {
+    for(auto& it: spheres){
+        it.move();
+    }
+}
+
 
 

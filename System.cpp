@@ -3,10 +3,15 @@
 //
 
 #include <iostream>
+#include <memory>
 
 #include "glad/glad.h"
 #include "System.h"
 #include "gameTime.h"
+#include "PhysicsEngine.h"
+#include "SkyBox.h"
+#include "Platform.h"
+#include "SphereContainer.h"
 
 float gameTime = 0;
 
@@ -17,8 +22,9 @@ System::System(): camera(glm::vec3(0.0f, 0.0f, 0.0f), 0.1f, 0.12f) {
     //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
     sphereContainer = std::unique_ptr<SphereContainer>(new SphereContainer);
     sphereContainer->addSphere(glm::vec3(0.0f, 0.0f, -5.0f));
-    platform = std::unique_ptr<Platform>(new Platform(glm::vec3(0.0f, -1.25f, -5.0f), glm::vec3(15.0f, 0.5f, 15.0f)));
-    skyBox = std::unique_ptr<SkyBox>(new SkyBox);
+    platform = std::make_shared<Platform>(glm::vec3(0.0f, -1.25f, -5.0f), glm::vec3(15.0f, 0.5f, 15.0f));
+    skyBox = std::make_shared<SkyBox>();
+    physicsEngine = std::make_shared<PhysicsEngine>(sphereContainer, platform);
 }
 
 void System::handleEvents()  {
@@ -40,6 +46,8 @@ void System::handleInput() {
 
 void System::update() {
     gameTime = clock.getElapsedTime().asSeconds();
+    physicsEngine->update();
+    sphereContainer->moveSpheres(); //Si muovono secondo il loro attributo velocità
     camera.reset(window);
 }
 

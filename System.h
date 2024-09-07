@@ -9,11 +9,12 @@
 #include <memory>
 
 #include "constants.h"
-#include "SphereContainer.h"
 #include "Camera.h"
-#include "Platform.h"
-#include "SkyBox.h"
 
+class SphereContainer;
+class Platform;
+class SkyBox;
+class PhysicsEngine;
 class System {
 private:
     void handleEvents();
@@ -25,9 +26,10 @@ private:
     sf::RenderWindow window;
     sf::Event event;
     Camera camera;
-    std::unique_ptr<SphereContainer> sphereContainer;
-    std::unique_ptr<Platform> platform;
-    std::unique_ptr<SkyBox> skyBox;
+    std::shared_ptr<SphereContainer> sphereContainer;
+    std::shared_ptr<Platform> platform;
+    std::shared_ptr<SkyBox> skyBox;
+    std::shared_ptr<PhysicsEngine> physicsEngine;
     sf::Clock clock;
 public:
     System();

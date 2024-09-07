@@ -21,6 +21,10 @@ add_executable(PhysicsSimulator main.cpp
         Platform.h
         SkyBox.cpp
         gameTime.h
+        PhysicsEngine.cpp
+        PhysicsEngine.h
+        CollisionSystem.cpp
+        CollisionSystem.h
 )
         
 target_include_directories(PhysicsSimulator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
