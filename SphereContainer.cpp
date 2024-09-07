@@ -11,11 +11,15 @@ SphereContainer::SphereContainer() {
 }
 
 void SphereContainer::draw(const glm::mat4 &view, const glm::mat4 &projection) {
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CW);
+    glCullFace(GL_BACK);
     shader.useProgram();
     shader.changeUniform4M("view", view);
     shader.changeUniform4M("projection", projection);
     glBindVertexArray(Sphere::getVAO());
     glDrawArraysInstanced(GL_TRIANGLES, 0, 62208, spheres.size());
+    glDisable(GL_CULL_FACE);
 }
 
 

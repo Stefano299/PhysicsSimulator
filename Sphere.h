@@ -11,6 +11,7 @@
 class Shader;
 class Sphere {
 private:
+    static void addNormals(const glm::vec3& vec1, const glm::vec3& vec2);
     static void initVertices();
     static void initBuffers();
     static float* vertexPos;
