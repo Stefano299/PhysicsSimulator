@@ -11,6 +11,7 @@ SphereContainer::SphereContainer() {
 }
 
 void SphereContainer::draw(const glm::mat4 &view, const glm::mat4 &projection) {
+    updateModels();
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CW);
     glCullFace(GL_BACK);
@@ -26,7 +27,7 @@ void SphereContainer::draw(const glm::mat4 &view, const glm::mat4 &projection) {
 void SphereContainer::addSphere(const glm::vec3 &pos) {
     Sphere sphere(pos);
     spheres.push_back(sphere);
-    models.push_back(sphere.getModel());
+    models.push_back(sphere.getModel());  //Inutile in quanto vengono  aggiornate ogni frame
     setAttribPointers();
 }
 
@@ -57,6 +58,14 @@ void SphereContainer::initShader() {
     shader.loadVertex("../Sphere.vert");
     shader.loadFragment("../Sphere.frag");
     shader.createProgram();
+}
+
+void SphereContainer::updateModels() {
+    models.clear();
+    for(const auto& it: spheres){
+        models.push_back(it.getModel());
+    }
+    setAttribPointers();
 }
 
 

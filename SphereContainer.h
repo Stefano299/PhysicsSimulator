@@ -16,6 +16,7 @@ class SphereContainer {
 private:
     void setAttribPointers();
     void initShader();
+    void updateModels();
     std::vector<Sphere> spheres;
     std::vector<glm::mat4> models;
     Shader shader;

@@ -26,6 +26,8 @@ public:
     static unsigned int getVAO();
     const glm::mat4& getModel() const;
     static void initData();
+    void move(const glm::vec3& dPos);
+    const glm::vec3& getPos() const;
     ~Sphere() = default; //TODO toglielo e metterci una funzione statica chiamata alla fine di system, in quanto l'array è statica
 };
 

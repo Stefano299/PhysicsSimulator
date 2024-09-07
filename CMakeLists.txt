@@ -17,6 +17,10 @@ add_executable(PhysicsSimulator main.cpp
         stb_image.h
         stb_image.cpp
         helper.cpp
+        Platform.cpp
+        Platform.h
+        SkyBox.cpp
+        gameTime.h
 )
         
 target_include_directories(PhysicsSimulator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)

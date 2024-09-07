@@ -6,13 +6,19 @@
 
 #include "glad/glad.h"
 #include "System.h"
+#include "gameTime.h"
+
+float gameTime = 0;
 
 System::System(): camera(glm::vec3(0.0f, 0.0f, 0.0f), 0.1f, 0.12f) {
+    clock.restart();
     initWindow();
     initOpenGL();
     //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
     sphereContainer = std::unique_ptr<SphereContainer>(new SphereContainer);
     sphereContainer->addSphere(glm::vec3(0.0f, 0.0f, -5.0f));
+    platform = std::unique_ptr<Platform>(new Platform(glm::vec3(0.0f, -1.25f, -5.0f), glm::vec3(15.0f, 0.5f, 15.0f)));
+    skyBox = std::unique_ptr<SkyBox>(new SkyBox);
 }
 
 void System::handleEvents()  {
@@ -33,12 +39,17 @@ void System::handleInput() {
 }
 
 void System::update() {
+    gameTime = clock.getElapsedTime().asSeconds();
     camera.reset(window);
 }
 
 void System::render() {
+    glm::mat4 view = camera.getView();
+    glm::mat4 projection = camera.getProjection();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    sphereContainer->draw(camera.getView(), camera.getProjection());
+    skyBox->draw(projection, glm::mat4(glm::mat3(view)));
+    sphereContainer->draw(view, projection);
+    platform->draw(view, projection);
     window.display();
 }
 
@@ -62,6 +73,7 @@ void System::initWindow() {
     window.create(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Physics Simulator", sf::Style::Default, settings);
     window.setFramerateLimit(60);
     window.setActive(true);
+
 }
 
 void System::initOpenGL() const {
@@ -72,4 +84,5 @@ void System::initOpenGL() const {
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     glEnable(GL_DEPTH_TEST);
 }
+
 

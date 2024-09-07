@@ -9,11 +9,11 @@ void main() {
     vec3 lightPos = vec3(-15.0f, 20.0f, 4.0f);
     vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
 
-    vec3 objColor = vec3(245.f/255, 169.f/255, 27.f/255);
-    float ambientIntensity = 0.5f;
+    vec3 objColor = vec3(185.f/255, 185.f/255, 185.f/255);
+    float ambientIntensity = 0.4f;
 
     vec3 viewVec = normalize(lightPos-vertexPos);
-    float diffuse = max(dot(viewVec, normalPos), 0.0f)*0.5;
+    float diffuse = max(dot(viewVec, normalPos), 0.0f);
     vec3 result = (diffuse+ambientIntensity)*lightColor;
 
     FragColor = vec4(result*objColor, 1.0f);

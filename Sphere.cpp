@@ -15,7 +15,8 @@ std::vector<float> Sphere::vertexNormals;
 
 Sphere::Sphere(const glm::vec3 &pos) {
     position = pos;
-    model = glm::translate(glm::mat4(1.0), pos);
+    model = glm::translate(glm::mat4(1.0), position);
+    model = glm::scale(model, glm::vec3(0.1f, 0.1f, 0.1f));
 }
 
 void Sphere::initVertices() {
@@ -117,6 +118,15 @@ const glm::mat4 &Sphere::getModel() const {
 void Sphere::initData() {
     initVertices();
     initBuffers();
+}
+
+void Sphere::move(const glm::vec3 &dPos) {
+    position += dPos;
+    model = glm::translate(glm::mat4(1.0), position);
+}
+
+const glm::vec3 &Sphere::getPos() const {
+    return position;
 }
 
 
