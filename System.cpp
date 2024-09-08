@@ -14,12 +14,13 @@
 
 float gameTime = 0;
 
-System::System(): camera(glm::vec3(0.0f, 1.0f, 0.0f), 0.1f, 0.12f) {
+System::System(): camera(glm::vec3(0.0f, 4.0f, 12.0f), 0.2f, 0.12f) {
     clock.restart();
     initWindow();
     initOpenGL();
     //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
-    emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 2.5f);
+    emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 0.1f);
+    emitter->createCylinder(glm::vec3(0.0f, 7.0f, 0.0f), 1.0, 4);
     platform = std::make_shared<Platform>(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(15.0f, 0.5f, 15.0f));
     skyBox = std::make_shared<SkyBox>();
     physicsEngine = std::make_shared<PhysicsEngine>(emitter, platform);
@@ -45,7 +46,7 @@ void System::handleInput() {
 void System::update() {
     gameTime = clock.getElapsedTime().asSeconds();
     physicsEngine->update();
-    emitter->emitSpheres();
+    //emitter->emitSpheres();
     emitter->updateSpheres(); //Si muovono secondo il loro attributo velocità
     camera.reset(window);
 }

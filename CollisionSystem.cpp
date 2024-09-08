@@ -30,7 +30,6 @@ bool CollisionSystem::sphereSphere(const Sphere& sphere1, const Sphere& sphere2,
     normal = sphere2FuturePos-sphere1FuturePos;
     if(glm::length(normal) <= sphere1Radius + sphere2Radius){
         normal = glm::normalize(normal);
-        std::cout  << "coll" << std::endl;
         return true;
     }else{
         normal = glm::vec3(0.0f);

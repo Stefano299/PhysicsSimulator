@@ -22,6 +22,7 @@ public:
     void updateSpheres();
     const std::vector<Sphere>& getSpheres() const;
     void drawSpheres(const glm::mat4& view, const glm::mat4& projection);
+    void createCylinder(const glm::vec3& pos, float radius, float height);
 };
 
 
