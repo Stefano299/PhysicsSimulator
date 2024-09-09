@@ -54,7 +54,7 @@ void PhysicsEngine::handleSpheresCollisionsOPT() const {
     for(const auto& itVec: collisionSections->getSections()) {
         for(const auto& it1: itVec) {
             glm::vec3 normal;
-            for (auto &it2: itVec) {
+            for (const auto &it2: itVec) {
                 if (it1 != it2 && CollisionSystem::sphereSphere(*it1, *it2, normal)) { //Ricordo che normal va da it1 a it2
                     glm::vec3 sphere2ReflectedVel = glm::reflect(it2->getVelocity(), normal);
                     glm::vec3 sphere1ReflectedVel = glm::reflect(it1->getVelocity(), -normal);
@@ -70,6 +70,7 @@ void PhysicsEngine::handleSpheresCollisionsOPT() const {
 
 
 void PhysicsEngine::update() {
+    collisionSections->clearSections();
     gravity();
     handleSpheresCollisionsOPT();
 }

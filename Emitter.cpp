@@ -15,17 +15,20 @@ Emitter::Emitter(const glm::vec3& position, float emittingSpeed, float spheresSp
     direction = glm::normalize(glm::vec3(-1.0f, 4.0f, 0.0f)); //Direzione in cui vengon lanciate
     rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     spheresCount = 0;
+    maxSpheres = 0;
 }
 
 void Emitter::emitSpheres() {
-    static float lastTIme = gameTime;
-    float dt = gameTime-lastTIme;
-    if(dt >= emittingSpeed){
-        lastTIme = gameTime;
-        glm::vec3 velocity = direction*spheresSpeed;
-        sphereContainer.addSphere(position, velocity);
-        direction = glm::vec3(glm::vec4(direction, 1.0f)*rotationMatrix);
-        spheresCount++;
+    if(maxSpheres != 0 && maxSpheres > spheresCount) {
+        static float lastTIme = gameTime;
+        float dt = gameTime - lastTIme;
+        if (dt >= emittingSpeed) {
+            lastTIme = gameTime;
+            glm::vec3 velocity = direction * spheresSpeed;
+            sphereContainer.addSphere(position, velocity);
+            direction = glm::vec3(glm::vec4(direction, 1.0f) * rotationMatrix);
+            spheresCount++;
+        }
     }
 }
 
@@ -61,5 +64,9 @@ void Emitter::createCylinder(const glm::vec3& pos, float radius, float height) {
 
 int Emitter::getSpheresCount() const {
     return spheresCount;
+}
+
+void Emitter::setMaxSpheres(int n) {
+    maxSpheres = n;
 }
 

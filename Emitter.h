@@ -18,8 +18,10 @@ private:
     float spheresSpeed;
     float emittingSpeed;
     int spheresCount;
+    int maxSpheres;
 public:
     Emitter(const glm::vec3& position, float emittingSpeed, float spheresSpeed);
+    void setMaxSpheres(int n);
     void emitSpheres();
     void updateSpheres();
     const std::vector<Sphere>& getSpheres() const;

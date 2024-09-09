@@ -24,6 +24,7 @@ private:
 public:
     CollisionSections(int width, int height, int depth, const Container& container);
     void setSphereSection(Sphere* sphere);
+    void clearSections();
     const std::vector<std::vector<Sphere*>> getSections() const;
 };
 

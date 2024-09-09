@@ -16,13 +16,12 @@
 
 float gameTime = 0;
 
-System::System(): camera(glm::vec3(0.0f, 5.5f, 17.0f), 0.5f, 0.12f) {
+System::System(): camera(glm::vec3(0.0f, 7.f, 27.0f), 0.5f, 0.12f) {
     clock.restart();
     initWindow();
     initOpenGL();
-    //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
-    //TUTTO DEVE STARE NELLE ASSI POSITIVE!!!!! (forse)
-    emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 2.0f, 3);
+    emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 0.01f, 15);
+    emitter->setMaxSpheres(1000);
     //emitter->createCylinder(glm::vec3(0.0f, 7.0f, 0.0f), 0.4, 1);
     skyBox = std::make_shared<SkyBox>();
     container = std::make_shared<Container>(glm::vec3(0.0, 0.0, 0.0), glm::vec3(7.0f, 7.0f, 7.f));

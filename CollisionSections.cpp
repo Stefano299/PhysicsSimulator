@@ -24,10 +24,6 @@ void CollisionSections::initVector() {
 }
 
 void CollisionSections::setSphereSection(Sphere *sphere) {
-    //Pulisco tutti i vettori prima di riempirli ancora
-    for(auto& it: sections) {
-        it.clear();
-    }
     //Devo avere la posizione relativa al container
     glm::vec3 offset = glm::vec3(1000.0f);
     //LO FACCIO PER AVERE TUTTE COORDINATE POSITIVE, O I CALCOLI VERREBERO STRANI
@@ -39,13 +35,24 @@ void CollisionSections::setSphereSection(Sphere *sphere) {
     int x = spherePos.x/cubeSize.x;
     int y = spherePos.y/cubeSize.y;
     int z = spherePos.z/cubeSize.z;
+    //Per prevedere segmentation faults
+    //TODO FIX
     if(x >= 5) x=4;
     if(y >= 5 ) y = 4;
     if (z >= 5) z = 4;
-    //std::cout << x << " " << y << " " << z << std::endl;
+    if(x < 0) x = 0;
+    if(y < 0) y = 0;
+    if(z < 0) z = 0;
     sections[x*height*depth+y*depth+z].push_back(sphere);
 }
 
 const std::vector<std::vector<Sphere *>> CollisionSections::getSections() const {
     return sections;
+}
+
+void CollisionSections::clearSections() {
+    //Pulisco tutti i vettori prima di riempirli ancora
+    for(auto& it: sections) {
+        it.clear();
+    }
 }
