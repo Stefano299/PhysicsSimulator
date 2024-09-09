@@ -8,12 +8,12 @@
 
 bool CollisionSystem::spherePlatform(const Sphere& sphere, const Platform& platform){
     float sphereRadius = sphere.getSize().y;
-    float topSideY = platform.getPosition().y+0.5f*platform.getSize().y; //L'altezza della faccia superiore della piattaforma inferiore
+    float sideOffeset = platform.getPosition().y+0.5f*platform.getSize().y; //L'altezza della faccia superiore della piattaforma inferiore
     float dTime = 1.0f/60; //Secondi tra un frame e l'altro
     glm::vec3 dPos = sphere.getVelocity()*dTime;
     glm::vec3 sphereFuturePos = sphere.getPos()+dPos;
 
-    return(sphereFuturePos.y-sphereRadius <= topSideY);
+    return(sphereFuturePos.y-sphereRadius <= sideOffeset);
 }
 
 bool CollisionSystem::sphereSphere(const Sphere& sphere1, const Sphere& sphere2, glm::vec3& normal){

@@ -20,10 +20,11 @@ System::System(): camera(glm::vec3(0.0f, 4.0f, 12.0f), 0.2f, 0.12f) {
     initOpenGL();
     //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
     emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 0.1f);
-    emitter->createCylinder(glm::vec3(0.0f, 7.0f, 0.0f), 1.0, 4);
+    emitter->createCylinder(glm::vec3(0.0f, 7.0f, 0.0f), 0.4, 1);
     platform = std::make_shared<Platform>(glm::vec3(0.0f, 0.0f, -5.0f), glm::vec3(15.0f, 0.5f, 15.0f));
     skyBox = std::make_shared<SkyBox>();
     physicsEngine = std::make_shared<PhysicsEngine>(emitter, platform);
+    sidePlatform = std::unique_ptr<SidePlatform>(new SidePlatform(glm::vec3(0.0, 5.0, -5.0), glm::vec3(3.0f, 1.0f, 3.0f)));
 }
 
 void System::handleEvents()  {
@@ -58,6 +59,7 @@ void System::render() {
     skyBox->draw(projection, glm::mat4(glm::mat3(view)));
     emitter->drawSpheres(view, projection);
     platform->draw(view, projection);
+    sidePlatform->draw(view, projection);
     window.display();
 }
 
@@ -91,6 +93,7 @@ void System::initOpenGL() const {
     glClearColor(0.6f, 0.8f, 0.9f, 1.0f);
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     glEnable(GL_DEPTH_TEST);
+    glLineWidth(50.0f);
 }
 
 
