@@ -12,14 +12,14 @@ Emitter::Emitter(const glm::vec3& position, float emittingSpeed, float spheresSp
     this->position = position;
     this->emittingSpeed = emittingSpeed;
     this->spheresSpeed = spheresSpeed;
-    direction = glm::normalize(glm::vec3(-1.0f, 4.0f, 0.0f)); //Direzione in cui vengon lanciate
+    direction = glm::normalize(glm::vec3(-1.0f, 4.5f, 0.0f)); //Direzione in cui vengon lanciate
     rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     spheresCount = 0;
-    maxSpheres = 0;
+    maxSpheres = 100000000000; //Va all'infinito, non ha un numero massimo, almeno che non venga messo dall'utente
 }
 
 void Emitter::emitSpheres() {
-    if(maxSpheres != 0 && maxSpheres > spheresCount) {
+    if(maxSpheres > spheresCount) {
         static float lastTIme = gameTime;
         float dt = gameTime - lastTIme;
         if (dt >= emittingSpeed) {

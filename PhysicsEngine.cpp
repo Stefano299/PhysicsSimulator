@@ -2,6 +2,7 @@
 // Created by stefano on 9/7/24.
 //
 
+#include <thread>
 #include "PhysicsEngine.h"
 #include "SphereContainer.h"
 #include "Container.h"
@@ -12,7 +13,7 @@
 PhysicsEngine::PhysicsEngine(std::shared_ptr<Emitter> emitter, std::shared_ptr<Container> container) {
     this->emitter = emitter;
     this->container = container;
-    collisionSections = std::unique_ptr<CollisionSections>(new CollisionSections(5, 5, 5, *container));
+    collisionSections = std::unique_ptr<CollisionSections>(new CollisionSections(6, 6, 6, *container));
 }
 
 void PhysicsEngine::gravity() const {
@@ -51,19 +52,48 @@ void PhysicsEngine::handleSpheresCollisions(Sphere& it1) const {
 }
 
 void PhysicsEngine::handleSpheresCollisionsOPT() const {
-    for(const auto& itVec: collisionSections->getSections()) {
-        for(const auto& it1: itVec) {
-            glm::vec3 normal;
-            for (const auto &it2: itVec) {
-                if (it1 != it2 && CollisionSystem::sphereSphere(*it1, *it2, normal)) { //Ricordo che normal va da it1 a it2
-                    glm::vec3 sphere2ReflectedVel = glm::reflect(it2->getVelocity(), normal);
-                    glm::vec3 sphere1ReflectedVel = glm::reflect(it1->getVelocity(), -normal);
-                    it1->setVelocity(sphere1ReflectedVel);
-                    it2->setVelocity(sphere2ReflectedVel);
+    const auto& sections = collisionSections->getSections();
+    int nThreads = 16; //Quelli della mia cpu
+    int nSections = collisionSections->getSections().size();
+    int nSectionsPerThread = nSections/nThreads; //Ogni thread ha un numero di sezione da svolgere
+
+
+    //Funzione lambda chiamata dal thread
+    auto threadFunc = [&](int start, int end){
+        auto startIt = std::next(sections.begin(), start);
+        auto endIt = std::next(sections.begin(), end);
+        for(auto itVec = startIt; itVec != endIt; itVec++) {
+            for(const auto& it1: *itVec) {
+                glm::vec3 normal;
+                for (const auto &it2: *itVec) {
+                    if (it1 != it2 && CollisionSystem::sphereSphere(*it1, *it2, normal)) { //Ricordo che normal va da it1 a it2
+                        glm::vec3 sphere2ReflectedVel = glm::reflect(it2->getVelocity(), normal);
+                        glm::vec3 sphere1ReflectedVel = glm::reflect(it1->getVelocity(), -normal);
+                        it1->setVelocity(sphere1ReflectedVel);
+                        it2->setVelocity(sphere2ReflectedVel);
+                    }
                 }
             }
         }
+    };
+
+    std::vector<std::thread> threads;
+    threads.reserve(nThreads);
+
+    for(int i = 0; i < nThreads; i++){
+        if(i == nThreads-1){  //La divisione non è perfetta.. l'ultimo ha più lavoro
+            threads.emplace_back(threadFunc, i*nSectionsPerThread, nSections);
+            break;
+        }
+        threads.emplace_back(threadFunc, i*nSectionsPerThread, (i+1)*nSectionsPerThread);
     }
+
+    for(auto& thread: threads){
+        if(thread.joinable()){
+            thread.join();
+        }
+    }
+    threads.clear();
 }
 
 
