@@ -15,23 +15,26 @@ bool CollisionSystem::sphereContainer(const Sphere& sphere, const Container& con
     float offset = FACE_THICKNESS/2;
     //Controllo le varie facce del  cubo
     bool collision = false;
-    if(sphereFuturePos.y+sphereRadius < container.getFrontPos().y+container.getSize().y/2) { //Sennò vola via dal cubo
-        if (sphereFuturePos.y - sphereRadius <= container.getBottomPos().y + offset) {
-            normal = glm::vec3(0.0f, 1.0f, 0.0f);
-            collision = true;
-        } else if (sphereFuturePos.z + sphereRadius >= container.getFrontPos().z - offset) {
-            normal = glm::vec3(0.0f, 0.0f, -1.0f);
-            collision = true;
-        } else if (sphereFuturePos.z - sphereRadius <= container.getBackPos().z + offset) {
-            normal = glm::vec3(0.0f, 0.0f, 1.0f);
-            collision = true;
-        } else if (sphereFuturePos.x - sphereRadius <= container.getLeftPos().x + offset) {
-            normal = glm::vec3(1.0f, 0.0f, 0.0f);
-            collision = true;
-        } else if (sphereFuturePos.x + sphereRadius >= container.getRightPos().x - offset) {
-            normal = glm::vec3(-1.0f, 0.0f, 0.0f);
-            collision = true;
-        }
+    if (sphereFuturePos.y - sphereRadius <= container.getBottomPos().y + offset) {
+        normal = glm::vec3(0.0f, 1.0f, 0.0f);
+        collision = true;
+    } else if (sphereFuturePos.z + sphereRadius >= container.getFrontPos().z - offset) {
+        normal = glm::vec3(0.0f, 0.0f, -1.0f);
+        collision = true;
+    } else if (sphereFuturePos.z - sphereRadius <= container.getBackPos().z + offset) {
+        normal = glm::vec3(0.0f, 0.0f, 1.0f);
+        collision = true;
+    } else if (sphereFuturePos.x - sphereRadius <= container.getLeftPos().x + offset) {
+        normal = glm::vec3(1.0f, 0.0f, 0.0f);
+        collision = true;
+    } else if (sphereFuturePos.x + sphereRadius >= container.getRightPos().x - offset) {
+        normal = glm::vec3(-1.0f, 0.0f, 0.0f);
+        collision = true;
+    }
+    //Anche se non la ho creata esplicitamente, considero come se ci fosse una faccia superiore al cubo
+    else if (sphereFuturePos.y + sphereRadius >= container.getFrontPos().y +container.getSize().y/2) {
+        normal = glm::vec3(0.0f, -1.0f, 0.0f);
+        collision = true;
     }
     else {
         normal = glm::vec3(0.0f);

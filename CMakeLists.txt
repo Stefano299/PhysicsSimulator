@@ -31,6 +31,8 @@ add_executable(PhysicsSimulator main.cpp
         SidePlatform.h
         Container.cpp
         Container.h
+        CollisionSections.cpp
+        CollisionSections.h
 )
         
 target_include_directories(PhysicsSimulator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)

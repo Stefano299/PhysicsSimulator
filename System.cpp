@@ -12,18 +12,20 @@
 #include "SkyBox.h"
 #include "Platform.h"
 #include "Container.h"
+#include "CollisionSections.h"
 
 float gameTime = 0;
 
-System::System(): camera(glm::vec3(0.0f, 4.0f, 12.0f), 0.2f, 0.12f) {
+System::System(): camera(glm::vec3(0.0f, 5.5f, 17.0f), 0.5f, 0.12f) {
     clock.restart();
     initWindow();
     initOpenGL();
     //Prima di fare chiamate binding di opengl devo inizializzare il contesto della finestra
-    emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 0.7f);
+    //TUTTO DEVE STARE NELLE ASSI POSITIVE!!!!! (forse)
+    emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 2.0f, 3);
     //emitter->createCylinder(glm::vec3(0.0f, 7.0f, 0.0f), 0.4, 1);
     skyBox = std::make_shared<SkyBox>();
-    container = std::make_shared<Container>(glm::vec3(0.0), glm::vec3(12.0f, 12.0f, 12.f));
+    container = std::make_shared<Container>(glm::vec3(0.0, 0.0, 0.0), glm::vec3(7.0f, 7.0f, 7.f));
     physicsEngine = std::make_shared<PhysicsEngine>(emitter, container);
 }
 
@@ -50,6 +52,8 @@ void System::update() {
     emitter->emitSpheres();
     emitter->updateSpheres(); //Si muovono secondo il loro attributo velocità
     camera.reset(window);
+    showFPS();
+    std::cout << emitter->getSpheresCount() << std::endl;
 }
 
 void System::render() {
@@ -93,6 +97,14 @@ void System::initOpenGL() const {
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     glEnable(GL_DEPTH_TEST);
     glLineWidth(10.0f);
+}
+
+void System::showFPS() const {
+    static sf::Clock FPSclock;
+    float time;
+    time = FPSclock.getElapsedTime().asSeconds();
+    std::cout << 1.f/time << std::endl;
+    FPSclock.restart();
 }
 
 

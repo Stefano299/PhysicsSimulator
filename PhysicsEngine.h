@@ -11,6 +11,7 @@
 #include "constants.h"
 #include "Sphere.h"
 
+class CollisionSections;
 class Emitter;
 class Container;
 class PhysicsEngine {
@@ -18,8 +19,10 @@ private:
     void gravity() const;
     void handleContainerCollisions(Sphere &it, const glm::vec3& newVel) const;
     void handleSpheresCollisions(Sphere &it1) const;
+    void handleSpheresCollisionsOPT() const;
     std::shared_ptr<Emitter> emitter;
     std::shared_ptr<Container> container;
+    std::unique_ptr<CollisionSections> collisionSections;
 public:
     PhysicsEngine(std::shared_ptr<Emitter> sphereContainer, std::shared_ptr<Container> container);
     void update();

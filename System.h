@@ -24,6 +24,7 @@ private:
     void render();
     void initWindow();
     void initOpenGL() const;
+    void showFPS() const;
     sf::RenderWindow window;
     sf::Event event;
     Camera camera;

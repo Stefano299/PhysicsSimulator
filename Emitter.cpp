@@ -8,21 +8,24 @@
 #include "gameTime.h"
 #include "constants.h"
 
-Emitter::Emitter(const glm::vec3& position, float speed) {
+Emitter::Emitter(const glm::vec3& position, float emittingSpeed, float spheresSpeed) {
     this->position = position;
-    this->speed = speed;
-    direction = glm::normalize(glm::vec3(-1.0f, 4.0f, 0.0f));
+    this->emittingSpeed = emittingSpeed;
+    this->spheresSpeed = spheresSpeed;
+    direction = glm::normalize(glm::vec3(-1.0f, 4.0f, 0.0f)); //Direzione in cui vengon lanciate
     rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    spheresCount = 0;
 }
 
 void Emitter::emitSpheres() {
     static float lastTIme = gameTime;
     float dt = gameTime-lastTIme;
-    if(dt >= speed){
+    if(dt >= emittingSpeed){
         lastTIme = gameTime;
-        glm::vec3 velocity = direction*4.0f;
+        glm::vec3 velocity = direction*spheresSpeed;
         sphereContainer.addSphere(position, velocity);
         direction = glm::vec3(glm::vec4(direction, 1.0f)*rotationMatrix);
+        spheresCount++;
     }
 }
 
@@ -54,5 +57,9 @@ void Emitter::createCylinder(const glm::vec3& pos, float radius, float height) {
             R -= SPHERE_RADIUS*2;
         }
     }
+}
+
+int Emitter::getSpheresCount() const {
+    return spheresCount;
 }
 
