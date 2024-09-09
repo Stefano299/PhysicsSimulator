@@ -41,6 +41,7 @@ SidePlatform::SidePlatform(const glm::vec3 &position, const glm::vec3 &size) {
 
 void SidePlatform::draw(const glm::mat4 &view, const glm::mat4 &projection) const {
     shader.useProgram();
+    shader.changeUniform4M("model", model); //Sennò se ne ho di più ne disegna solo una
     shader.changeUniform4M("view", view);
     shader.changeUniform4M("projection", projection);
     glBindVertexArray(VAO);
@@ -62,5 +63,9 @@ void SidePlatform::initShader() {
     shader.loadVertex("../SidePlatform.vert");
     shader.loadFragment("../SidePlatform.frag");
     shader.createProgram();
+}
+
+const glm::vec3& SidePlatform::getPosition() const {
+    return position;
 }
 

@@ -22,6 +22,7 @@ private:
 public:
     SidePlatform(const glm::vec3 &position, const glm::vec3 &size);
     void draw(const glm::mat4& view, const glm::mat4& projection) const;
+    const glm::vec3& getPosition() const;
 };
 
 

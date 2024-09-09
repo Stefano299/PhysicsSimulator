@@ -8,9 +8,9 @@
 #include <glm/glm.hpp>
 
 class Sphere;
-class Platform;
+class Container;
 namespace CollisionSystem {
-    bool spherePlatform(const Sphere& sphere, const Platform& platform);
+    bool sphereContainer(const Sphere& sphere, const Container& container, glm::vec3 &normal);
     //Il terzo argomento restituisce il vettore normale dello scontro
     bool sphereSphere(const Sphere& sphere1, const Sphere& sphere2, glm::vec3& normal);
 };

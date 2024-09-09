@@ -29,6 +29,8 @@ add_executable(PhysicsSimulator main.cpp
         Emitter.h
         SidePlatform.cpp
         SidePlatform.h
+        Container.cpp
+        Container.h
 )
         
 target_include_directories(PhysicsSimulator PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)

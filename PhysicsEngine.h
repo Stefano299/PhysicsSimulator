@@ -12,16 +12,16 @@
 #include "Sphere.h"
 
 class Emitter;
-class Platform;
+class Container;
 class PhysicsEngine {
 private:
     void gravity() const;
-    void handlePlatformsCollisions(Sphere &it, const glm::vec3& newVel) const;
+    void handleContainerCollisions(Sphere &it, const glm::vec3& newVel) const;
     void handleSpheresCollisions(Sphere &it1) const;
     std::shared_ptr<Emitter> emitter;
-    std::shared_ptr<Platform> platform;
+    std::shared_ptr<Container> container;
 public:
-    PhysicsEngine(std::shared_ptr<Emitter> sphereContainer, std::shared_ptr<Platform> platform);
+    PhysicsEngine(std::shared_ptr<Emitter> sphereContainer, std::shared_ptr<Container> container);
     void update();
 
 };

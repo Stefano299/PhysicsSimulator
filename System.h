@@ -11,8 +11,8 @@
 #include "constants.h"
 #include "Camera.h"
 #include "Emitter.h"
-#include "SidePlatform.h"
 
+class Container;
 class Platform;
 class SkyBox;
 class PhysicsEngine;
@@ -28,10 +28,9 @@ private:
     sf::Event event;
     Camera camera;
     std::shared_ptr<Emitter> emitter; //TODO rendili unique
-    std::shared_ptr<Platform> platform;
     std::shared_ptr<SkyBox> skyBox;
     std::shared_ptr<PhysicsEngine> physicsEngine;
-    std::unique_ptr<SidePlatform> sidePlatform;
+    std::shared_ptr<Container> container;
     sf::Clock clock;
 public:
     System();

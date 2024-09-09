@@ -4,13 +4,13 @@
 
 #include "PhysicsEngine.h"
 #include "SphereContainer.h"
-#include "Platform.h"
+#include "Container.h"
 #include "CollisionSystem.h"
 #include "Emitter.h"
 
-PhysicsEngine::PhysicsEngine(std::shared_ptr<Emitter> emitter, std::shared_ptr<Platform> platform) {
+PhysicsEngine::PhysicsEngine(std::shared_ptr<Emitter> emitter, std::shared_ptr<Container> container) {
     this->emitter = emitter;
-    this->platform = platform;
+    this->container = container;
 }
 
 void PhysicsEngine::gravity() const {
@@ -19,17 +19,18 @@ void PhysicsEngine::gravity() const {
         float dv = -G * dt; // a = dv/dt
         glm::vec3 velOffset = glm::vec3(0.0f, dv, 0.0f);
         glm::vec3 newVel = it.getVelocity() + velOffset;
-        handlePlatformsCollisions(it, newVel);
+        handleContainerCollisions(it, newVel);
         handleSpheresCollisions(it);
     }
 }
 
-void PhysicsEngine::handlePlatformsCollisions(Sphere &it, const glm::vec3 &newVel) const {
-    if(!CollisionSystem::spherePlatform(it, *platform)) { //Controlla la posizione futura
+void PhysicsEngine::handleContainerCollisions(Sphere &it, const glm::vec3 &newVel) const {
+    glm::vec3 normal; //Vettore normale alla collisione
+    if(!CollisionSystem::sphereContainer(it, *container, normal)) { //Controlla la posizione futura
         it.setVelocity(newVel);
     }else
     {
-        glm::vec3 reflectedVel = glm::reflect(it.getVelocity(), glm::vec3(0.0f, 1.0f, 0.0f));
+        glm::vec3 reflectedVel = glm::reflect(it.getVelocity(), normal);
         it.setVelocity(reflectedVel); //Non voglio aumenti la velocità nel momento in cui torna su
     }
 }
