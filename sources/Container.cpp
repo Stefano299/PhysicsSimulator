@@ -2,8 +2,8 @@
 // Created by stefano on 9/9/24.
 //
 
-#include "Container.h"
-#include "constants.h"
+#include "../headers/Container.h"
+#include "../headers/constants.h"
 
 Container::Container(const glm::vec3 &position, const glm::vec3 &size) {
     this->position = position;

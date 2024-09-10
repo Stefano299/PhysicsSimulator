@@ -2,7 +2,7 @@
 // Created by stefano on 9/8/24.
 //
 
-#include "SidePlatform.h"
+#include "../headers/SidePlatform.h"
 
 float SidePlatform::vertices[72] ={         // Linee della base
         -0.5f, -0.5f, -0.5f,   0.5f, -0.5f, -0.5f,  // V0 -> V1
@@ -60,8 +60,8 @@ void SidePlatform::initBuffers() {
 }
 
 void SidePlatform::initShader() {
-    shader.loadVertex("../SidePlatform.vert");
-    shader.loadFragment("../SidePlatform.frag");
+    shader.loadVertex("../shaders/SidePlatform.vert");
+    shader.loadFragment("../shaders/SidePlatform.frag");
     shader.createProgram();
 }
 

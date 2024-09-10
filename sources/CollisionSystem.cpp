@@ -2,10 +2,10 @@
 // Created by stefano on 9/7/24.
 //
 
-#include "CollisionSystem.h"
-#include "Sphere.h"
-#include "Container.h"
-#include "constants.h"
+#include "../headers/CollisionSystem.h"
+#include "../headers/Sphere.h"
+#include "../headers/Container.h"
+#include "../headers/constants.h"
 
 bool CollisionSystem::sphereContainer(const Sphere& sphere, const Container& container, glm::vec3 &normal){
     float sphereRadius = sphere.getSize().y;

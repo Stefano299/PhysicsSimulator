@@ -6,7 +6,7 @@
 #define PHYSICSSIMULATOR_SPHERE_H
 
 #include <vector>
-#include <glm/glm.hpp>
+#include "glm/glm.hpp"
 
 class Shader;
 class Sphere {

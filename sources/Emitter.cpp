@@ -4,9 +4,9 @@
 
 #include <iostream>
 
-#include "Emitter.h"
-#include "gameTime.h"
-#include "constants.h"
+#include "../headers/Emitter.h"
+#include "../headers/gameTime.h"
+#include "../headers/constants.h"
 
 Emitter::Emitter(const glm::vec3& position, float emittingSpeed, float spheresSpeed) {
     this->position = position;

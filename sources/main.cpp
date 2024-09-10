@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "System.h"
+#include "../headers/System.h"
 
 int main() {
     System system;

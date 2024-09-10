@@ -2,9 +2,9 @@
 // Created by stefano on 9/9/24.
 //
 
-#include "CollisionSections.h"
-#include "Sphere.h"
-#include "Container.h"
+#include "../headers/CollisionSections.h"
+#include "../headers/Sphere.h"
+#include "../headers/Container.h"
 
 CollisionSections::CollisionSections(int width, int height, int depth, const Container& container) {
     this->width = width;

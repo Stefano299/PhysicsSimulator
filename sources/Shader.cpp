@@ -2,8 +2,8 @@
 // Created by stefano on 8/18/24.
 //
 
-#include "Shader.h"
-#include "helper.h"
+#include "../headers/Shader.h"
+#include "../headers/helper.h"
 
 void Shader::loadVertex(const char *path) {
     vertexID = glCreateShader(GL_VERTEX_SHADER);

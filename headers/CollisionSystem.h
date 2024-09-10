@@ -5,7 +5,7 @@
 #ifndef PHYSICSSIMULATOR_COLLISIONSYSTEM_H
 #define PHYSICSSIMULATOR_COLLISIONSYSTEM_H
 
-#include <glm/glm.hpp>
+#include "glm/glm.hpp"
 
 class Sphere;
 class Container;

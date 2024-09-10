@@ -2,9 +2,9 @@
 // Created by stefano on 8/18/24.
 //
 
-#include "Camera.h"
+#include "../headers/Camera.h"
 #include <SFML/Window.hpp>
-#include"constants.h"
+#include"../headers/constants.h"
 
 Camera::Camera(const glm::vec3 &pos, float speed, float sensitivity) {
     yaw = -90.0f;

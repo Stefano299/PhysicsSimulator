@@ -6,8 +6,8 @@
 #define PHYSICSSIMULATOR_SPHERECONTAINER_H
 
 #include <vector>
-#include <glad/glad.h>
-#include <glm/glm.hpp>
+#include "glad/glad.h"
+#include "glm/glm.hpp"
 
 #include "Shader.h"
 #include "Sphere.h"

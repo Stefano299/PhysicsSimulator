@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-#include "Sphere.h"
+#include "../headers/Sphere.h"
 #include "glad/glad.h"
 #include "glm/ext/matrix_transform.hpp"
 

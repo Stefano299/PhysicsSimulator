@@ -2,8 +2,8 @@
 // Created by stefano on 8/24/24.
 //
 
-#include "stb_image.h"
-#include "SkyBox.h"
+#include "../headers/stb_image.h"
+#include "../headers/SkyBox.h"
 
 float vertexPos[] {
 // positions
@@ -107,8 +107,8 @@ void SkyBox::initTextures() {
 }
 
 void SkyBox::loadShader() {
-    shader.loadVertex("../vSkyBox.glsl");
-    shader.loadFragment("../fSkyBox.glsl");
+    shader.loadVertex("../shaders/vSkyBox.glsl");
+    shader.loadFragment("../shaders/fSkyBox.glsl");
     shader.createProgram();
     shader.useProgram();
     shader.changeUniform1i("cubeTexture", 0);

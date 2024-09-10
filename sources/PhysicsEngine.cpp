@@ -3,12 +3,12 @@
 //
 
 #include <thread>
-#include "PhysicsEngine.h"
-#include "SphereContainer.h"
-#include "Container.h"
-#include "CollisionSystem.h"
-#include "Emitter.h"
-#include "CollisionSections.h"
+#include "../headers/PhysicsEngine.h"
+#include "../headers/SphereContainer.h"
+#include "../headers/Container.h"
+#include "../headers/CollisionSystem.h"
+#include "../headers/Emitter.h"
+#include "../headers/CollisionSections.h"
 
 PhysicsEngine::PhysicsEngine(std::shared_ptr<Emitter> emitter, std::shared_ptr<Container> container) {
     this->emitter = emitter;

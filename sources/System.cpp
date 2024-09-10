@@ -6,13 +6,13 @@
 #include <memory>
 
 #include "glad/glad.h"
-#include "System.h"
-#include "gameTime.h"
-#include "PhysicsEngine.h"
-#include "SkyBox.h"
-#include "Platform.h"
-#include "Container.h"
-#include "CollisionSections.h"
+#include "../headers/System.h"
+#include "../headers/gameTime.h"
+#include "../headers/PhysicsEngine.h"
+#include "../headers/SkyBox.h"
+#include "../headers/Platform.h"
+#include "../headers/Container.h"
+#include "../headers/CollisionSections.h"
 
 float gameTime = 0;
 
@@ -51,8 +51,7 @@ void System::update() {
     emitter->emitSpheres();
     emitter->updateSpheres(); //Si muovono secondo il loro attributo velocità
     camera.reset(window);
-    showFPS();
-    std::cout << emitter->getSpheresCount() << std::endl;
+    //showFPS();
 }
 
 void System::render() {

@@ -2,7 +2,7 @@
 // Created by stefano on 9/6/24.
 //
 
-#include "SphereContainer.h"
+#include "../headers/SphereContainer.h"
 
 SphereContainer::SphereContainer() {
     glGenBuffers(1, &instancesVBO);
@@ -56,8 +56,8 @@ void SphereContainer::setAttribPointers() {
 }
 
 void SphereContainer::initShader() {
-    shader.loadVertex("../Sphere.vert");
-    shader.loadFragment("../Sphere.frag");
+    shader.loadVertex("../shaders/Sphere.vert");
+    shader.loadFragment("../shaders/Sphere.frag");
     shader.createProgram();
 }
 

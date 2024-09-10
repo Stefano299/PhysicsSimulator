@@ -2,7 +2,7 @@
 // Created by stefano on 9/7/24.
 //
 
-#include "Platform.h"
+#include "../headers/Platform.h"
 
 float vertexData[] = {
         -0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -86,8 +86,8 @@ void Platform::initBuffers() {
 }
 
 void Platform::initShader() {
-    shader.loadVertex("../Platform.vert");
-    shader.loadFragment("../Platform.frag");
+    shader.loadVertex("../shaders/Platform.vert");
+    shader.loadFragment("../shaders/Platform.frag");
     shader.createProgram();
     shader.useProgram();
 }
