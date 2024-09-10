@@ -36,7 +36,8 @@ public:
     const glm::vec3& getVelocity() const;
     const glm::vec3& getSize() const;
     bool operator!=(const Sphere& right) const;
-    ~Sphere() = default; //TODO toglielo e metterci una funzione statica chiamata alla fine di system, in quanto l'array è statica
+    void setPosition(const glm::vec3& pos);
+    static void clear();
 };
 
 

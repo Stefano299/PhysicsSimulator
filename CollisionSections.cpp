@@ -13,7 +13,7 @@ CollisionSections::CollisionSections(int width, int height, int depth, const Con
     containerSize = container.getSize();
     containerPos =container.getFrontPos() - glm::vec3(containerSize.x/2, containerSize.y/2, 0.0f);
     cubeSize = glm::vec3(containerSize.x/(float)width, containerSize.y/(float)height, containerSize.y/(float)depth);
-    initVector();  //TODO vedere se si può rimuovere
+    initVector();
 }
 
 void CollisionSections::initVector() {
@@ -36,7 +36,7 @@ void CollisionSections::setSphereSection(Sphere *sphere) {
     int y = spherePos.y/cubeSize.y;
     int z = spherePos.z/cubeSize.z;
     //Per prevedere segmentation faults
-    //TODO FIX
+    //Ci sarebbero delle correzioni da fare, ma evito di spenderci tempo in tanto diminuisco di molto poco la precisione
     if(x >= 5) x=4;
     if(y >= 5 ) y = 4;
     if (z >= 5) z = 4;

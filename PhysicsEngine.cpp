@@ -37,6 +37,17 @@ void PhysicsEngine::handleContainerCollisions(Sphere &it, const glm::vec3 &newVe
         glm::vec3 reflectedVel = glm::reflect(it.getVelocity(), normal);
         it.setVelocity(reflectedVel); //Non voglio aumenti la velocità nel momento in cui torna su
     }
+    glm::vec3 newNormal;
+    /*Può succedere che anche con la nuova vel la sfera rimanga "incastrata" nella faccia con cui ha fatto collisione
+    a causa delle collisioni con le altre sfere. Per risolvere il problema controllo se, anche dopo con la nuova velocità
+    collide con la stessa faccia. In questo caso imposto una velocità con direzione ortogonale alla faccia e la muovo
+    per essere sicuro esca dalla "zona critica"*/
+    if(CollisionSystem::sphereContainer(it, *container, newNormal) && normal == newNormal){
+        glm::vec3 correctedVel = newNormal*glm::length(newVel);
+        it.setVelocity(correctedVel);
+        it.move();
+    }
+
 }
 
 void PhysicsEngine::handleSpheresCollisions(Sphere& it1) const {

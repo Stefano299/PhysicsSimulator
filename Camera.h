@@ -36,6 +36,7 @@ public:
     float getYaw() const;
     glm::mat4 getView() const;
     bool isCursorLocked() const;
+    void updateProjection(float width, float height);
     const glm::mat4& getProjection() const;
 };
 

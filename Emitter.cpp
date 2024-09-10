@@ -15,7 +15,7 @@ Emitter::Emitter(const glm::vec3& position, float emittingSpeed, float spheresSp
     direction = glm::normalize(glm::vec3(-1.0f, 4.5f, 0.0f)); //Direzione in cui vengon lanciate
     rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(15.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     spheresCount = 0;
-    maxSpheres = 100000000000; //Va all'infinito, non ha un numero massimo, almeno che non venga messo dall'utente
+    maxSpheres = 1000000000; //Va all'infinito, non ha un numero massimo, almeno che non venga messo dall'utente
 }
 
 void Emitter::emitSpheres() {

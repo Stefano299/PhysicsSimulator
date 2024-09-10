@@ -69,3 +69,8 @@ const glm::vec3& SidePlatform::getPosition() const {
     return position;
 }
 
+SidePlatform::~SidePlatform() {
+    glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &VAO);
+}
+

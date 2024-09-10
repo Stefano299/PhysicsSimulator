@@ -21,11 +21,11 @@ System::System(): camera(glm::vec3(0.0f, 7.f, 27.0f), 0.5f, 0.12f) {
     initWindow();
     initOpenGL();
     emitter = std::make_shared<Emitter>(glm::vec3(0.0f, 2.0f, -5.0f), 0.01f, 15);
-    //emitter->setMaxSpheres(1000);
+    emitter->setMaxSpheres(1500);
     //emitter->createCylinder(glm::vec3(0.0f, 7.0f, 0.0f), 0.4, 1);
-    skyBox = std::make_shared<SkyBox>();
+    skyBox = std::unique_ptr<SkyBox>(new SkyBox);
     container = std::make_shared<Container>(glm::vec3(0.0, 0.0, 0.0), glm::vec3(7.0f, 7.0f, 7.f));
-    physicsEngine = std::make_shared<PhysicsEngine>(emitter, container);
+    physicsEngine = std::unique_ptr<PhysicsEngine>(new PhysicsEngine(emitter, container));
 }
 
 void System::handleEvents()  {
@@ -34,7 +34,7 @@ void System::handleEvents()  {
     }
     else if(event.type == sf::Event::Resized){
         glViewport(0, 0, event.size.width, event.size.height);
-        //TODO aggiorna projection matrix
+        camera.updateProjection(event.size.width, event.size.height);
     }
     camera.handleRotation(event);
     camera.handleCursorLock(event, window);
@@ -60,7 +60,7 @@ void System::render() {
     glm::mat4 projection = camera.getProjection();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     skyBox->draw(projection, glm::mat4(glm::mat3(view)));
-    //emitter->drawSpheres(view, projection);
+    emitter->drawSpheres(view, projection);
     container->draw(view, projection);
     window.display();
 }
@@ -104,6 +104,10 @@ void System::showFPS() const {
     time = FPSclock.getElapsedTime().asSeconds();
     std::cout << 1.f/time << std::endl;
     FPSclock.restart();
+}
+
+System::~System() {
+    Sphere::clear();
 }
 
 

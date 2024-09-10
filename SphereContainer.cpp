@@ -79,5 +79,9 @@ void SphereContainer::moveSpheres() {
     }
 }
 
+SphereContainer::~SphereContainer() {
+    glDeleteBuffers(1, &instancesVBO);
+}
+
 
 

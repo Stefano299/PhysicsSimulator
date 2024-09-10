@@ -118,5 +118,9 @@ const glm::mat4 &Camera::getProjection() const {
     return projection;
 }
 
+void Camera::updateProjection(float width, float height) {
+    projection = glm::perspective(glm::radians(45.0f), width/height, 0.1f, 150.0f);
+}
+
 
 

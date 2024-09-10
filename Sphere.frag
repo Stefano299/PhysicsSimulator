@@ -6,10 +6,11 @@ in vec3 normalPos;
 out vec4 FragColor;
 
 void main() {
+    vec3 objColor = vec3(245.f/255, 169.f/255, 27.f/255);
+
     vec3 lightPos = vec3(-15.0f, 20.0f, 4.0f);
     vec3 lightColor = vec3(1.0f, 1.0f, 1.0f);
 
-    vec3 objColor = vec3(245.f/255, 169.f/255, 27.f/255);
     float ambientIntensity = 0.5f;
 
     vec3 viewVec = normalize(lightPos-vertexPos);

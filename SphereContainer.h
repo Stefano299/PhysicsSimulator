@@ -27,6 +27,7 @@ public:
     void addSphere(const glm::vec3& pos, const glm::vec3& velocity);
     void moveSpheres();
     const std::vector<Sphere>& getSpheres() const;
+    ~SphereContainer();
 };
 
 

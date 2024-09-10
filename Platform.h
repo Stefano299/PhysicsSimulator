@@ -25,6 +25,7 @@ public:
     void draw(const glm::mat4& view, const glm::mat4& projection) const;
     const glm::vec3& getSize() const;
     const glm::vec3& getPosition() const;
+    ~Platform();
 };
 
 

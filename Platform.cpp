@@ -100,4 +100,9 @@ const glm::vec3 &Platform::getPosition() const {
     return position;
 }
 
+Platform::~Platform() {
+    glDeleteBuffers(1, &VBO);
+    glDeleteVertexArrays(1, &VAO);
+}
+
 

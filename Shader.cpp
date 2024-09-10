@@ -65,3 +65,9 @@ void Shader::changeUniformVec3(const std::string &name, float v1, float v2, floa
 void Shader::changeUniform1i(const std::string &name, int parameter) const{
     glUniform1i(glGetUniformLocation(programID, name.c_str()), parameter);
 }
+
+Shader::~Shader() {
+    glDeleteShader(vertexID);
+    glDeleteShader(fragmentID);
+    glDeleteProgram(programID);
+}

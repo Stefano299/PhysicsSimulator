@@ -155,4 +155,16 @@ bool Sphere::operator!=(const Sphere &right) const {
     return(position != right.position);
 }
 
+void Sphere::setPosition(const glm::vec3 &pos) {
+    position = pos;
+    model = glm::translate(glm::mat4(1.0f), position);
+    model = glm::scale(model, size);
+}
+
+void Sphere::clear() {
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    delete vertexPos;
+}
+
 

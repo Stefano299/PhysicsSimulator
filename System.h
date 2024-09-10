@@ -28,14 +28,15 @@ private:
     sf::RenderWindow window;
     sf::Event event;
     Camera camera;
-    std::shared_ptr<Emitter> emitter; //TODO rendili unique
-    std::shared_ptr<SkyBox> skyBox;
-    std::shared_ptr<PhysicsEngine> physicsEngine;
+    std::shared_ptr<Emitter> emitter;
+    std::unique_ptr<SkyBox> skyBox;
     std::shared_ptr<Container> container;
+    std::unique_ptr<PhysicsEngine> physicsEngine;
     sf::Clock clock;
 public:
     System();
     void run();
+    ~System();
 };
 
 
